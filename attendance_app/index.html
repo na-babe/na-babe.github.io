@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>在线考勤系统</title>
+    <!-- 引入 Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <!-- 引入图标库 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>在线考勤</h1>
+        <div class="attendance-box">
+            <div class="input-group">
+                <input type="text" id="nameInput" placeholder="请输入姓名">
+                <button onclick="checkAttendance()">确认考勤</button>
+            </div>
+            <div id="resultMessage"></div>
+        </div>
+        <div class="counter">
+            <i class="fas fa-users"></i>
+            <span id="attendanceCount">0</span> 人已考勤
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .container {
+        text-align: center;
+        color: white;
+        padding: 2rem;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .attendance-box {
+        background: rgba(255, 255, 255, 0.95);
+        padding: 2rem;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        width: 400px;
+        margin: 0 auto;
+    }
+
+    .input-group {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 1.5rem;
+    }
+
+    input {
+        flex: 1;
+        padding: 12px;
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        font-size: 16px;
+        transition: border-color 0.3s;
+    }
+
+    input:focus {
+        outline: none;
+        border-color: #667eea;
+    }
+
+    button {
+        padding: 12px 25px;
+        background: #667eea;
+        border: none;
+        border-radius: 8px;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        transition: transform 0.2s, background 0.3s;
+    }
+
+    button:hover {
+        background: #764ba2;
+        transform: translateY(-2px);
+    }
+
+    #resultMessage {
+        min-height: 40px;
+        font-weight: 500;
+        color: #333;
+    }
+
+    .counter {
+        margin-top: 2rem;
+        font-size: 1.2rem;
+        background: rgba(255,255,255,0.2);
+        padding: 1rem 2rem;
+        border-radius: 10px;
+        display: inline-block;
+    }
+
+    /* 动画效果 */
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .success { color: #48bb78 !important; }
+    .error { color: #f56565 !important; }
+</style>
+</html>
